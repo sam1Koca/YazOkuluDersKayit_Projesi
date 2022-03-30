@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="OgrenciListesi.aspx" />
+    <Content Include="OgrenciSil.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +93,13 @@
     </Compile>
     <Compile Include="OgrenciListesi.aspx.designer.cs">
       <DependentUpon>OgrenciListesi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OgrenciSil.aspx.cs">
+      <DependentUpon>OgrenciSil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OgrenciSil.aspx.designer.cs">
+      <DependentUpon>OgrenciSil.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

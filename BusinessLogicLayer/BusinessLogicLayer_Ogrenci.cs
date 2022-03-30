@@ -19,10 +19,22 @@ namespace BusinessLogicLayer
             return -1; // işlemi yapma | Boş döndür
         }
 
-        public List<EntityOgrenci> BusinessLogicLayer_Listele()
+        public static List<EntityOgrenci> BusinessLogicLayer_Listele()
         {
             return DalOgrenci.OgrenciListesi();
 
+        }
+
+        public static bool OgrenciDelete_BLL(int i)
+        {
+            if (i != null) 
+            {
+                return DalOgrenci.OgrenciDelete(i);
+            }
+            else
+            {
+                return false;
+            }
         }
 
     }

@@ -14,7 +14,7 @@ namespace DataAccesLayer
         { // int yapma sebebimiz şu: Bana geriye bir kayıt sayısı döndürecek(bunu ExecuteNonQuery ile yapacak) o yüzden.
 
             SqlCommand command1 = new SqlCommand("insert into TBLOGRENCİ " +
-                "(OGRAD,OGRSOYAD,OGRNUMARA,OGRFOTO,OGRSIFRE) values (@p1,@p2,@p3,@p4,@p5)", Connection.connection);
+                "(OGRAD,OGRSOYAD,OGRNUMARA,OGRFOTO,OGRSIFRE) values (@p1,@p2,@p3,@p4,@p5)", Connection_db.connection);
 
             if (command1.Connection.State != ConnectionState.Open)
             {
@@ -50,14 +50,26 @@ namespace DataAccesLayer
                 entityOgrenci.AD = dataReader["OGRAD"].ToString();
                 entityOgrenci.SOYAD = dataReader["OGRSOYAD"].ToString();
                 entityOgrenci.NUMARA = dataReader["OGRNUMARA"].ToString();
-                entityOgrenci.FOTOGRAF = dataReader["OGRFOTOGRAF"].ToString();
-                entityOgrenci.SİFRE = dataReader["OGRSİFRE"].ToString();
-                entityOgrenci.BAKİYE = Convert.ToDouble(dataReader["OGRBAKİYE"].ToString());
+                entityOgrenci.FOTOGRAF = dataReader["OGRFOTO"].ToString();
+                entityOgrenci.SİFRE = dataReader["OGRSIFRE"].ToString();
+                entityOgrenci.BAKİYE = Convert.ToDouble(dataReader["OGRBAKIYE"].ToString());
                 degerler.Add(entityOgrenci);
             }
             dataReader.Close();
             return degerler;
 
+        }
+
+        public static bool OgrenciDelete(int parametre)
+        {
+            SqlCommand command = new SqlCommand("Delete From TBLOGRENCİ where OGRID=@p1",Connection_db.connection);
+
+            if (command.Connection.State != ConnectionState.Open)
+            {
+                command.Connection.Open();
+            }
+            command.Parameters.AddWithValue("@p1", parametre);
+            return command.ExecuteNonQuery() > 0; // 0 dan büyük halini döndür bana - eğer işlem oluyorsa zaten 0'dan büyük olacak ve true olur
         }
     }
 }
