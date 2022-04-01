@@ -71,5 +71,56 @@ namespace DataAccesLayer
             command.Parameters.AddWithValue("@p1", parametre);
             return command.ExecuteNonQuery() > 0; // 0 dan büyük halini döndür bana - eğer işlem oluyorsa zaten 0'dan büyük olacak ve true olur
         }
+
+        public static List<EntityOgrenci> OgrenciDetayListesi(int id)
+        {
+            List<EntityOgrenci> degerler = new List<EntityOgrenci>();
+
+            SqlCommand commandAll = new SqlCommand("Select * From TBLOGRENCİ where OGRID=@p1", Connection_db.connection); // db'deki tüm öğrencileri çek.
+
+            commandAll.Parameters.AddWithValue("@p1", id);
+
+            if (commandAll.Connection.State != ConnectionState.Open) // Bağlantı kapalıysa aç
+            {
+                commandAll.Connection.Open();
+            }
+            SqlDataReader dataReader = commandAll.ExecuteReader();
+
+            while (dataReader.Read()) // Okuma işlemi gerçekleştiği sürece..
+            {
+                EntityOgrenci entityOgrenci = new EntityOgrenci();
+                entityOgrenci.AD = dataReader["OGRAD"].ToString();
+                entityOgrenci.SOYAD = dataReader["OGRSOYAD"].ToString();
+                entityOgrenci.NUMARA = dataReader["OGRNUMARA"].ToString();
+                entityOgrenci.FOTOGRAF = dataReader["OGRFOTO"].ToString();
+                entityOgrenci.SİFRE = dataReader["OGRSIFRE"].ToString();
+                entityOgrenci.BAKİYE = Convert.ToDouble(dataReader["OGRBAKIYE"].ToString());
+                degerler.Add(entityOgrenci);
+            }
+            dataReader.Close();
+            return degerler;
+
+        }
+        public static bool OgrenciUpdate(EntityOgrenci ogrenci)
+        {
+            SqlCommand sqlCommand = new SqlCommand("Update TBLOGRENCİ set OGRAD=@p1, OGRSOYAD=@p2, OGRNUMARA=@p3, OGRFOTO=@p4, OGRSIFRE=@p5 " +
+                "WHERE OGRID=@p6",Connection_db.connection);
+
+            if (sqlCommand.Connection.State != ConnectionState.Open)
+            {
+                sqlCommand.Connection.Open(); // bağlantı kapalıysa eğer bağlantıyı aç
+            }
+
+            sqlCommand.Parameters.AddWithValue("@p1", ogrenci.AD);
+            sqlCommand.Parameters.AddWithValue("@p2", ogrenci.SOYAD);
+            sqlCommand.Parameters.AddWithValue("@p3", ogrenci.NUMARA);
+            sqlCommand.Parameters.AddWithValue("@p4", ogrenci.FOTOGRAF);
+            sqlCommand.Parameters.AddWithValue("@p5", ogrenci.SİFRE);
+            sqlCommand.Parameters.AddWithValue("@p6", ogrenci.İD);
+
+            return sqlCommand.ExecuteNonQuery() > 0;
+        }
+
+
     }
 }

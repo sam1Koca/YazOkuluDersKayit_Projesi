@@ -37,6 +37,21 @@ namespace BusinessLogicLayer
             }
         }
 
+        public static List<EntityOgrenci> BusinessLogicLayer_DetayListele(int p)
+        {
+            return DalOgrenci.OgrenciDetayListesi(p);
+
+        }
+        public static bool OgrenciUpdate_BLL(EntityOgrenci entityOgrenci)
+        {
+            if (entityOgrenci.AD != null && entityOgrenci.SOYAD != null && 
+                entityOgrenci.NUMARA != null && entityOgrenci.SİFRE != null && entityOgrenci.FOTOGRAF != null && entityOgrenci.İD > 0)
+            {
+                return DalOgrenci.OgrenciUpdate(entityOgrenci);
+            }
+            return false;
+        }
+
     }
 
 }
