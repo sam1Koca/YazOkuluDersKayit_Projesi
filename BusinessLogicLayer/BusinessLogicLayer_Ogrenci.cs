@@ -8,6 +8,8 @@ namespace BusinessLogicLayer
 {
     public class BusinessLogicLayer_Ogrenci
     {
+        // Öğrenci için Ad yada herhangi birine boş değer girmememiz gerekmektedir.
+
         public static int OgrenciAdd_BLL(EntityOgrenci entityOgrenci)
         {
             if (entityOgrenci.AD != null && entityOgrenci.SOYAD != null && entityOgrenci.NUMARA != null && entityOgrenci.SİFRE != null && entityOgrenci.FOTOGRAF != null)
@@ -27,7 +29,7 @@ namespace BusinessLogicLayer
 
         public static bool OgrenciDelete_BLL(int i)
         {
-            if (i != null) 
+            if (i >= 0) // Bir id değeri varsa anlamına gelmektedir. 
             {
                 return DalOgrenci.OgrenciDelete(i);
             }

@@ -23,16 +23,16 @@ namespace EntityLayer
         }
 
 
-        private string Min;
-        public string MİN
+        private int Min;
+        public int MİN
         {
             get { return Min; }
             set { Min = value; }
         }
 
 
-        private string Max;
-        public string MAX
+        private int Max;
+        public int MAX
         {
             get { return Max; }
             set { Max = value; }

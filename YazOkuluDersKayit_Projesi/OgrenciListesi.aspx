@@ -32,8 +32,8 @@
                 <td><%#Eval("AD")%></td>
                 <td><%#Eval("SOYAD")%></td>
                 <td><%#Eval("NUMARA")%></td>
-                <td><%#Eval("FOTOGRAF")%></td>
                 <td><%#Eval("SİFRE")%></td>
+                <td><%#Eval("FOTOGRAF")%></td>
                 <td><%#Eval("BAKİYE")%></td>
                 <td>
                     <asp:HyperLink NavigateUrl= '<%# "~/OgrenciSil.aspx?OGRID=" + Eval("İD") %>' ID="HyperLink1" runat="server" CssClass="btn btn-danger">Sil</asp:HyperLink>
