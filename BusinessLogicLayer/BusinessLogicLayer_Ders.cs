@@ -8,12 +8,20 @@ using EntityLayer;
 
 namespace BusinessLogicLayer
 {
-    class BusinessLogicLayer_Ders
+    public class BusinessLogicLayer_Ders
     {
         public static List<EntityDers> BusinessLogicLayerDers_Listele()
         {
             return DalDers.DersListesi();
+        }
 
+        public static int TalepEkleBLL(EntityBasvuruForm form)
+        {
+            if (form.BASVURUOGRTİD != null && form.BASVURUDERSİD != null)
+            {
+                return DalDers.TalepEkle(form);
+            }
+            return -1;
         }
     }
 }

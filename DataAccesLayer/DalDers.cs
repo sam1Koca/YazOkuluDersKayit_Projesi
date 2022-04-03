@@ -27,14 +27,28 @@ namespace DataAccesLayer
                 EntityDers entityDers = new EntityDers();
                 entityDers.İD = Convert.ToInt32(dataReader["DERSID"].ToString());
                 entityDers.DERSAD = dataReader["DERSAD"].ToString();
-                entityDers.MİN = int.Parse(dataReader["DERSMINKONT"].ToString());
-                entityDers.MAX = int.Parse(dataReader["DERSMAKSKONT"].ToString());
+                entityDers.MİN = dataReader["DERSMINKONT"].ToString();
+                entityDers.MAX = dataReader["DERSMAKSKONT"].ToString();
 
                 degerler.Add(entityDers);
             }
             dataReader.Close();
             return degerler;
 
+        }
+
+        public static int TalepEkle(EntityBasvuruForm entityBasvuru)
+        {
+            SqlCommand sqlCommand = new SqlCommand("İnsert İnto TBLBASVURUFORM (OGRENCIID,DERSID) values (@p1,@p2)",Connection_db.connection);
+
+            sqlCommand.Parameters.AddWithValue("@p1", entityBasvuru.BASVURUOGRTİD);
+            sqlCommand.Parameters.AddWithValue("@p2", entityBasvuru.BASVURUDERSİD);
+
+            if (sqlCommand.Connection.State != ConnectionState.Open)
+            {
+                sqlCommand.Connection.Open();
+            }
+            return sqlCommand.ExecuteNonQuery();
         }
     }
 }
